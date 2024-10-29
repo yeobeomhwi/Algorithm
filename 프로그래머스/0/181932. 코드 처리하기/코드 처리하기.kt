@@ -1,22 +1,21 @@
 class Solution {
     fun solution(code: String): String {
-        var answer: String = ""
-        var mode = false
-        for(i in code.indices){
-            if(code[i] =='1'){
-                mode = !mode
-                continue 
-            }
-            if(mode == false && i % 2 ==0){
-                answer+= code[i]
-            }
-            if(mode == true && i % 2 == 1){
-                answer+= code[i]
+        var answer = ""
+        var mode = false // false = 0, true = 1
+        
+        code.forEachIndexed { i, v ->
+            if (v == '1') { 
+                mode = !mode 
+                return@forEachIndexed 
+            } 
+            else if (!mode && i % 2 == 0) {
+                answer += v 
+            } 
+            else if (mode && i % 2 != 0) {
+                answer += v 
             }
         }
-        if(answer.isEmpty()){
-            return "EMPTY"
-        }
-        return answer
+        
+        return if (answer.isNotEmpty()) answer else "EMPTY" 
     }
 }
